@@ -43,7 +43,7 @@ class Dictionary:
         ipa_span = self.body.select('.us .pron .ipa')[0]
 
         if ipa_span:
-            return ipa_span.get_text()
+            return '/' + ipa_span.get_text() + '/'
         return ''
 
     def getSoundFile(self):
@@ -51,6 +51,7 @@ class Dictionary:
         sound_file_url = self.base_url + span_audio_play_button['data-src-mp3']
         self.downloadFile(sound_file_url,
                           './resources/cambridge_dictionary/' + self.word + '.mp3')
+        return self.word + '.mp3'
 
     def downloadFile(self, url_file, path_name):
         urllib.request.urlretrieve(url_file, path_name)
