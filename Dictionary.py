@@ -5,9 +5,7 @@ import urllib.request
 
 class Dictionary:
     HEADERS = {'User-Agent': 'Chrome/68.0.3440.84'}
-
-    def __init__(self, dictionary_url):
-        self.dictionary_url = dictionary_url
+    dictionary_url = None
 
     def getWordData(self, word):
         self.word = word
@@ -38,20 +36,6 @@ class Dictionary:
 
     def getBody(self):
         return list(self.html.children)[3]
-
-    def getPronunciation(self):
-        ipa_span = self.body.select('.us .pron .ipa')[0]
-
-        if ipa_span:
-            return '/' + ipa_span.get_text() + '/'
-        return ''
-
-    def getSoundFile(self):
-        span_audio_play_button = self.body.select('.pron-info .us .circle')[0]
-        sound_file_url = self.base_url + span_audio_play_button['data-src-mp3']
-        self.downloadFile(sound_file_url,
-                          './resources/cambridge_dictionary/' + self.word + '.mp3')
-        return self.word + '.mp3'
 
     def downloadFile(self, url_file, path_name):
         urllib.request.urlretrieve(url_file, path_name)

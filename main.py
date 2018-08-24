@@ -1,3 +1,11 @@
+from Cambridge import Cambridge
+
+c = Cambridge()
+c.getWordData('luck')
+print(c.getPronunciation())
+exit(11)
+
+
 from Dictionary import Dictionary
 from DB import DB
 
