@@ -5,7 +5,7 @@ import urllib.request
 
 class Dictionary:
     HEADERS = {'User-Agent': 'Chrome/68.0.3440.84'}
-    dictionary_url = None
+    search_url = None
 
     def getWordData(self, word):
         self.word = word
@@ -16,11 +16,11 @@ class Dictionary:
         self.body = self.getBody()
 
     def getUrlBase(self):
-        parse_result = urlparse(self.dictionary_url)
+        parse_result = urlparse(self.search_url)
         return parse_result.scheme + '://' + parse_result.netloc
 
     def getPageContent(self):
-        page = get(self.dictionary_url + self.word, headers=self.HEADERS)
+        page = get(self.search_url + self.word, headers=self.HEADERS)
 
         if page.status_code == 200:
             return page.content
@@ -37,5 +37,5 @@ class Dictionary:
     def getBody(self):
         return list(self.html.children)[3]
 
-    def downloadFile(self, url_file, path_name):
-        urllib.request.urlretrieve(url_file, path_name)
+    def downloadFile(self, url_file, path_with_name):
+        urllib.request.urlretrieve(url_file, path_with_name)
