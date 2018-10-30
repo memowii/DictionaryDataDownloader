@@ -16,8 +16,8 @@ class Cambridge(Dictionary):
 
     def getSoundFile(self, path):
         body = self.getBody()
-        span_audio_play_button = body.select('.pron-info .us .circle')[0]
-        sound_file_url = self.getUrlBase() + span_audio_play_button['data-src-mp3']
+        audio_play_button_span = body.select('.pron-info .us .circle')[0]
+        sound_file_url = self.getUrlBase() + audio_play_button_span['data-src-mp3']
         soud_file_name = self.word + '.mp3'
         self.downloadFile(sound_file_url, path + soud_file_name)
         return soud_file_name

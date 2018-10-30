@@ -1,32 +1,18 @@
 from Cambridge import Cambridge
-
-c = Cambridge()
-c.getWordData('luck')
-print(c.getPronunciation())
-exit(11)
-
-
-from Dictionary import Dictionary
 from DB import DB
+from time import sleep
 
-cambridge_dictionary = Dictionary('https://dictionary.cambridge.org/dictionary/english/')
+cambridge_dictionary = Cambridge()
 db = DB()
 duolingo_words = db.getAllDuolingoWords()
 
 for duolingo_word in duolingo_words:
-    print(duolingo_word)
-    cambridge_dictionary.getWordData(duolingo_word['word'])
-    pronunciation = cambridge_dictionary.getPronunciation()
-    sound_file = cambridge_dictionary.getSoundFile()
-    db.updatePronAndSoundFile(duolingo_word['id'],
-                              pronunciation,
-                              sound_file)
-    break
-
-
-exit(11)
-
-cambridge_dictionary.getWordData('luck')
-cambridge_dictionary.getSoundFile()
+    if len(duolingo_word['word'].split(' ')) == 1 and duolingo_word['word'].find("'") == -1:
+        cambridge_dictionary.getWordData(duolingo_word['word'])
+        word_pronunciation = cambridge_dictionary.getPronunciation()
+        db.updatePronAndSoundFile(duolingo_word['id'], word_pronunciation)
+        cambridge_dictionary.getSoundFile('./resources/cambridge_dictionary/')
+        sleep(1)
 
 # TODO: aplicar threads in duolingo_words.py para hacerlo mas rapido
+# TODO: utilizar algo para alchemy para la base de datos

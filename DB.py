@@ -1,5 +1,6 @@
 import pymysql.cursors
 
+
 class DB:
 
     def __init__(self):
@@ -19,15 +20,14 @@ class DB:
         except Exception as e:
             print(e)
 
-    def updatePronAndSoundFile(self, id_duolingo_word, pronunciation, sound_file):
+    def updatePronAndSoundFile(self, id_duolingo_word, pronunciation):
         try:
             with self.connection.cursor() as cursor:
-                sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
-                sql = 'update DuolingoWord set pronunciation=%s, sound_file=%s where id=%s'
-                cursor.execute(sql, (pronunciation, sound_file, id_duolingo_word))
+                sql = 'update DuolingoWord set pronunciation=%s where id=%s'
+                cursor.execute(sql, (pronunciation, id_duolingo_word))
             self.connection.commit()
         except Exception as e:
-            print(e, pronunciation, sound_file)
+            print(e, pronunciation)
 
     def disconnect(self):
         self.connection.close()
