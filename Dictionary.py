@@ -5,15 +5,12 @@ import urllib.request
 
 class Dictionary:
     HEADERS = {'User-Agent': 'Chrome/68.0.3440.84'}
-    search_url = None
+    search_url = ''
 
     def getWordData(self, word):
         self.word = word
-        self.base_url = self.getUrlBase()
         self.page_content = self.getPageContent()
         self.soup = self.getSoup()
-        self.html = self.getHtml()
-        self.body = self.getBody()
 
     def getUrlBase(self):
         parse_result = urlparse(self.search_url)
@@ -32,10 +29,10 @@ class Dictionary:
             return BS(self.page_content, 'html.parser')
 
     def getHtml(self):
-        return list(self.soup.children)[2]
+        return self.soup.html
 
     def getBody(self):
-        return list(self.html.children)[3]
+        return self.soup.html.body
 
     def downloadFile(self, url_file, path_with_name):
         urllib.request.urlretrieve(url_file, path_with_name)
