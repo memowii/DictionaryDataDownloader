@@ -29,5 +29,15 @@ class DB:
         except Exception as e:
             print(e, pronunciation)
 
+    def getWordsWithIpa(self, ipa):
+        try:
+            with self.connection.cursor() as cursor:
+                sql = 'select * from DuolingoWord where locate(%s, DuolingoWord.pronunciation) > 0'
+                cursor.execute(sql, (ipa))
+                return cursor.fetchall()
+            self.connection.commit()
+        except Exception as e:
+            print(e)
+
     def disconnect(self):
         self.connection.close()
