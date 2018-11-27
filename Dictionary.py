@@ -36,5 +36,3 @@ class Dictionary:
 
     def downloadFile(self, url_file, path_with_name):
         urllib.request.urlretrieve(url_file, path_with_name)
-x
-    def
