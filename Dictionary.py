@@ -22,7 +22,7 @@ class Dictionary:
         if page.status_code == 200:
             return page.content
         else:
-            raise ValueError('Failure when getting web page for word {}'.format(word))
+            raise ValueError('Failure when getting web page for word {}'.format(self.word))
 
     def getSoup(self):
         if self.page_content:
@@ -36,3 +36,5 @@ class Dictionary:
 
     def downloadFile(self, url_file, path_with_name):
         urllib.request.urlretrieve(url_file, path_with_name)
+x
+    def

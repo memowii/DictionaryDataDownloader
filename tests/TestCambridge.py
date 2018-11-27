@@ -25,6 +25,10 @@ class TestCambridge(unittest.TestCase):
         self.assertTrue(os.path.exists(sound_file_path))
         remove(sound_file_path)
 
+    def test_getWordData_for_bigger(self):
+        cambridge = Cambridge()
+        cambridge.getWordData('bigger')
+        print(cambridge.getPronunciation())
 
 if __name__ == '__main__':
     unittest.main()
