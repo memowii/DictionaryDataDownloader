@@ -22,13 +22,22 @@ class TestCambridge(unittest.TestCase):
         cambridge = Cambridge()
         cambridge.getWordData('luck')
         sound_file_path = path + cambridge.getSoundFile(path)
-        self.assertTrue(os.path.exists(sound_file_path))
+        self.assertTrue(os.path.isfile(sound_file_path))
         remove(sound_file_path)
 
     def test_getWordData_for_bigger(self):
         cambridge = Cambridge()
         cambridge.getWordData('bigger')
-        print(cambridge.getPronunciation())
+        pronunciation = cambridge.getPronunciation()
+        self.assertEqual('', pronunciation)
+
+    def test_getSoundFile_for_bigger(self):
+        path = './temp-downloads/'
+        cambridge = Cambridge()
+        cambridge.getWordData('bigger')
+        sound_file_path = path + cambridge.getSoundFile(path)
+        self.assertFalse(os.path.isfile(sound_file_path))
+
 
 if __name__ == '__main__':
     unittest.main()

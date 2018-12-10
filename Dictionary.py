@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as BS
 from urllib.parse import urlparse
 import urllib.request
 
+
 class Dictionary:
     HEADERS = {'User-Agent': 'Chrome/68.0.3440.84'}
     search_url = ''
